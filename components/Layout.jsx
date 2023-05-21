@@ -19,7 +19,7 @@ export default function Layout({children}) {
   return (
     <div className='min-h-screen flex' style={{backgroundColor: '#051E34'}}>
       <Navbar/>
-      <div className='bg-white flex-grow mt-2 mr-2 rounded-lg mb-2 '>
+      <div className='bg-white flex-grow mt-2 mr-2 p-5 rounded-lg mb-2 '>
         <span >{children}</span>
       </div>
       
