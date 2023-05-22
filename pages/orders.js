@@ -9,6 +9,7 @@ const Orders = () => {
     useEffect( ()=>{
         const fetchData = async () => {
         const response = await axios.get('api/orders');
+        console.log(response.data)
         setOrders(response.data);            
         }
 
@@ -32,6 +33,9 @@ const Orders = () => {
                     Product
                 </th>
                 <th scope="col" className="px-6 py-3">
+                    PAID
+                </th>
+                <th scope="col" className="px-6 py-3">
                     <span className="sr-only">Edit</span>
                 </th>
             </tr>
@@ -40,7 +44,7 @@ const Orders = () => {
             {
                 orders.length > 0 &&
                 orders.map(order=>(
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={order._id}>
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {order.createdAt}
                     </th>
@@ -53,11 +57,16 @@ const Orders = () => {
                     {
                         order.line_items.length >0 &&
                         order.line_items.map(item=>(
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4" key={item}>
                                 {item.price_data.product_data.name} * {item.quantity}
                             </td>
                         ))
                     }
+
+                    <td className='px-6 py-4 text-right text-red-500'>
+                        <p>{order.paid}</p>
+                        
+                    </td>
                     
                     <td className="px-6 py-4 text-right">
                         <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
